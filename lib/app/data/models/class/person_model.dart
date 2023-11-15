@@ -1,16 +1,45 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+class ResponseListPersons {
+  final List<Persona>? data;
+
+  ResponseListPersons({this.data});
+
+  factory ResponseListPersons.fromJson(Map<String, dynamic> json) {
+    return ResponseListPersons(
+      data: json['data'] != null
+          ? List<Persona>.from(json['data'].map((x) => Persona.fromJson(x)))
+          : null,
+    );
+  }
+}
+
+class PersonaDTO {
+  final Persona? data;
+  dynamic support;
+
+  PersonaDTO({this.data, this.support});
+
+  factory PersonaDTO.fromJson(Map<String, dynamic> json) {
+    return PersonaDTO(
+      data: json['data'] != null ? Persona.fromJson(json['data']) : null,
+      support: json['support'],
+    );
+  }
+}
+
 class Persona {
-  final int id;
-  final String email;
-  final String firstName;
-  final String lastName;
-  final String avatar;
+  final int? id;
+  final String? email;
+  final String? firstName;
+  final String? lastName;
+  final String? avatar;
 
   Persona({
-    required this.id,
-    required this.email,
-    required this.firstName,
-    required this.lastName,
-    required this.avatar,
+    this.id,
+    this.email,
+    this.firstName,
+    this.lastName,
+    this.avatar,
   });
 
   // Constructor para crear una instancia de Persona a partir de un mapa JSON
@@ -28,4 +57,11 @@ class Persona {
   String toString() {
     return 'Persona{id: $id, email: $email, firstName: $firstName, lastName: $lastName, avatar: $avatar}';
   }
+}
+
+abstract class APIResponse {
+  int statusCode;
+  APIResponse({
+    required this.statusCode,
+  });
 }
