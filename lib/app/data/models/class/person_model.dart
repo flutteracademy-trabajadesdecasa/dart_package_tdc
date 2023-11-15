@@ -53,6 +53,16 @@ class Persona {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'email': email,
+      'first_name': firstName,
+      'last_name': lastName,
+      'avatar': avatar,
+    };
+  }
+
   @override
   String toString() {
     return 'Persona{id: $id, email: $email, firstName: $firstName, lastName: $lastName, avatar: $avatar}';

@@ -8,13 +8,34 @@ class ServicesReqresApi {
   Persona person = Persona();
   PersonaDTO personDTO = PersonaDTO();
 
-  Future<List<Persona>> getReqRespServiceListUsers() async {
-    String url = "https://reqres.in/api/users?page=2";
-    Uri httpsUri = Uri.parse(url);
+  Future<List<Persona>> getReqRespServiceListUsers(
+    int page, {
+    Persona? persona,
+  }) async {
+    // String url = "https://reqres.in/api/users?page=2";
+    // Uri httpsUri = Uri.parse(url);
+
+    Uri httpsUri = Uri(
+      scheme: 'https',
+      host: 'reqres.in',
+      path: '/api/users',
+      queryParameters: {
+        "page": "$page",
+      },
+    );
 
     // print(httpsUri);
 
-    await http.get(httpsUri).then((response) {
+    await http
+        .post(
+      httpsUri,
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+        "apiKey": "miapk22345677",
+      },
+      body: jsonEncode(persona!.toJson()),
+    )
+        .then((response) {
       // print(response);
       // print(response.statusCode);
       // print(response.body);
@@ -58,8 +79,13 @@ class ServicesReqresApi {
   }
 
   Future<PersonaDTO> getSinglePersonDTO() async {
-    String url = "https://reqres.in/api/users/2";
-    Uri uriPersonUrl = Uri.parse(url);
+    // String url = "https://reqres.in/api/users/2";
+
+    Uri uriPersonUrl = Uri(
+      scheme: 'https',
+      host: 'reqres.in',
+      path: '/api/users/2',
+    );
 
     await http.get(uriPersonUrl).then((response) {
       if (response.statusCode == 200) {

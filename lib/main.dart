@@ -21,13 +21,19 @@ void main() async {
   ServicesReqresApi servicesReqresApiInstance = ServicesReqresApi();
 
   List<Persona> misPersonas =
-      await servicesReqresApiInstance.getReqRespServiceListUsers();
+      await servicesReqresApiInstance.getReqRespServiceListUsers(2);
 
   print(misPersonas);
 
   Persona miPersona = await servicesReqresApiInstance.getSinglePerson();
 
   print(miPersona);
+
+  Map<String, dynamic> miMapPerson = miPersona.toJson();
+
+  print(miMapPerson);
+
+  print(jsonEncode(miMapPerson).toString());
 
   PersonaDTO miPersonaDTO =
       await servicesReqresApiInstance.getSinglePersonDTO();
