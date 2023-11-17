@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dart_package_tdc/app/data/models/class/person_model.dart';
+import 'package:dart_package_tdc/app/data/models/json/person_model_fake.dart';
 import 'package:http/http.dart' as http;
 
 class ServicesReqresApi {
@@ -33,7 +34,7 @@ class ServicesReqresApi {
         "Content-Type": "application/json; charset=UTF-8",
         "apiKey": "miapk22345677",
       },
-      body: jsonEncode(persona!.toJson()),
+      body: jsonEncode(persona?.toJson()),
     )
         .then((response) {
       // print(response);
@@ -81,19 +82,21 @@ class ServicesReqresApi {
   Future<PersonaDTO> getSinglePersonDTO() async {
     // String url = "https://reqres.in/api/users/2";
 
-    Uri uriPersonUrl = Uri(
-      scheme: 'https',
-      host: 'reqres.in',
-      path: '/api/users/2',
-    );
+    // Uri uriPersonUrl = Uri(
+    //   scheme: 'https',
+    //   host: 'reqres.in',
+    //   path: '/api/users/2',
+    // );
 
-    await http.get(uriPersonUrl).then((response) {
-      if (response.statusCode == 200) {
-        Map<String, dynamic> resultPerson = jsonDecode(response.body);
-        print(response.body);
-        personDTO = PersonaDTO.fromJson(resultPerson);
-      }
-    });
+    // await http.get(uriPersonUrl).then((response) {
+    //   if (response.statusCode == 200) {
+    //     Map<String, dynamic> resultPerson = jsonDecode(response.body);
+    //     print(response.body);
+    //     personDTO = PersonaDTO.fromJson(resultPerson);
+    //   }
+    // });
+
+    personDTO = MockPersons.myPersonFake;
     return personDTO;
   }
 }
